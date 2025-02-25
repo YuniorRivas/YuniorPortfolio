@@ -1,108 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yunior Rivas Data Journalism Projects</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yunior Rivas Data Journalism Projects</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        body {
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-            color: #333;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-        }
+    body {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
 
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
+    /* Fullscreen canvas for the animated background */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
 
-        h1 {
-            font-size: 2.5em;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
-        }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
 
-        p {
-            font-size: 1.2em;
-            color: #555;
-            margin-bottom: 20px;
-        }
+    h1 {
+      font-size: 3em;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
 
-        .project-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
+    p {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 20px;
+    }
 
-        .project-links a {
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 20px;
-            font-size: 1em;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(255, 120, 150, 0.3);
-        }
+    .project-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
 
-        .project-links a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 120, 150, 0.5);
-        }
+    .project-links a {
+      background: linear-gradient(90deg, #ff758c, #ff7eb3);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      box-shadow: 0 5px 15px rgba(255, 120, 150, 0.3);
+    }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #666;
-        }
+    .project-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 120, 150, 0.5);
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Animated background canvas -->
+  <canvas id="bgCanvas"></canvas>
 
-    <div class="container">
-        <h1>Yunior Rivas</h1>
-        <p>Data Journalist | Digital Storyteller</p>
+  <div class="container">
+    <h1>Yunior Rivas</h1>
+    <p>Data Journalist | Digital Storyteller</p>
 
-        <div class="project-links">
-            <a href="https://yuniorrivas.github.io/DashboardProgress/" target="_blank">Influence of Social Media</a>
-            <a href="https://yuniorrivas.github.io/VisualStoryFinal/" target="_blank">Fentanyl Crisis Story</a>
-            <a href="https://yuniorrivas.github.io/UtilityProject/" target="_blank">Know Your Rights Protest Project</a>
-            <a href="https://yuniorrivas.github.io/Workplace-Heat-Story/" target="_blank">Heat-Related Workplace Injury</a>
-            <a href="https://yuniorrivas.github.io/Science-Feature-Final/" target="_blank">Climate Change and Foodborne Illness</a>
-        </div>
-
-        <p class="footer">Designed with ☕, by Yunior Rivas ✨</p>
+    <div class="project-links">
+      <a href="https://yuniorrivas.github.io/DashboardProgress/" target="_blank">Influence of Social Media</a>
+      <a href="https://yuniorrivas.github.io/VisualStoryFinal/" target="_blank">Fentanyl Crisis Story</a>
+      <a href="https://yuniorrivas.github.io/UtilityProject/" target="_blank">Know Your Rights Protest Project</a>
+      <a href="https://yuniorrivas.github.io/Workplace-Heat-Story/" target="_blank">Heat-Related Workplace Injury</a>
+      <a href="https://yuniorrivas.github.io/Science-Feature-Final/" target="_blank">Climate Change and Foodborne Illness</a>
     </div>
 
+    <p class="footer">Designed with ☕, by Yunior Rivas ✨</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Set canvas to full window size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    const numParticles = 100;
+
+    // Particle class definition
+    class Particle {
+      constructor(x, y, directionX, directionY, size, color) {
+        this.x = x;
+        this.y = y;
+        this.directionX = directionX;
+        this.directionY = directionY;
+        this.size = size;
+        this.color = color;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        // Reverse direction on edge collision
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+          this.directionX = -this.directionX;
+        }
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+          this.directionY = -this.directionY;
+        }
+        this.x += this.directionX;
+        this.y += this.directionY;
+        this.draw();
+      }
+    }
+
+    // Initialize particles
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < numParticles; i++) {
+        const size = Math.random() * 2 + 1;
+        const x = Math.random() * (canvas.width - size * 2) + size;
+        const y = Math.random() * (canvas.height - size * 2) + size;
+        const directionX = (Math.random() * 0.8) - 0.2;
+        const directionY = (Math.random() * 0.8) - 0.2;
+        const color = 'rgba(255, 255, 255, 1)';
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(particle => particle.update());
+      connectParticles();
+    }
+
+    // Connect nearby particles with lines
+    function connectParticles() {
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          const dx = particlesArray[a].x - particlesArray[b].x;
+          const dy = particlesArray[a].y - particlesArray[b].y;
+          const distance = dx * dx + dy * dy;
+          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    init();
+    animate();
+  </script>
 </body>
 </html>

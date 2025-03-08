@@ -22,7 +22,6 @@
       overflow: hidden;
     }
 
-    /* Fullscreen canvas for the animated background */
     #bgCanvas {
       position: fixed;
       top: 0;
@@ -34,22 +33,24 @@
 
     .container {
       background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
+      padding: 20px;
+      margin: 5%;
       border-radius: 20px;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
+      max-width: 90%;
+      width: 400px;
       animation: fadeIn 1.5s ease-in-out;
     }
 
     h1 {
       font-size: 3em;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 0px;
       color: #333;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.25em;
       color: #555;
       margin-bottom: 20px;
     }
@@ -57,7 +58,7 @@
     .project-links {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
     }
 
@@ -65,8 +66,8 @@
       background: linear-gradient(90deg, #ff758c, #ff7eb3);
       color: #fff;
       text-decoration: none;
-      padding: 12px 20px;
-      font-size: 1em;
+      padding: 10px 15px;
+      font-size: 0.9em;
       font-weight: bold;
       border-radius: 50px;
       transition: all 0.3s ease;
@@ -80,8 +81,8 @@
     }
 
     .footer {
-      margin-top: 20px;
-      font-size: 0.9em;
+      margin-top: 15px;
+      font-size: 0.8em;
       color: #666;
     }
 
@@ -95,10 +96,24 @@
         transform: translateY(0);
       }
     }
+
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .project-links a {
+        padding: 8px 12px;
+        font-size: 0.85em;
+      }
+
+      .container {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Animated background canvas -->
   <canvas id="bgCanvas"></canvas>
 
   <div class="container">
@@ -122,14 +137,12 @@
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Set canvas to full window size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     let particlesArray = [];
-    const numParticles = 100;
+    let numParticles = window.innerWidth < 768 ? 50 : 100;
 
-    // Particle class definition
     class Particle {
       constructor(x, y, directionX, directionY, size, color) {
         this.x = x;
@@ -148,7 +161,6 @@
       }
 
       update() {
-        // Reverse direction on edge collision
         if (this.x + this.size > canvas.width || this.x - this.size < 0) {
           this.directionX = -this.directionX;
         }
@@ -161,9 +173,9 @@
       }
     }
 
-    // Initialize particles
     function init() {
       particlesArray = [];
+      numParticles = window.innerWidth < 768 ? 50 : 100;
       for (let i = 0; i < numParticles; i++) {
         const size = Math.random() * 2 + 1;
         const x = Math.random() * (canvas.width - size * 2) + size;
@@ -175,37 +187,20 @@
       }
     }
 
-    // Animation loop
     function animate() {
       requestAnimationFrame(animate);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particlesArray.forEach(particle => particle.update());
-      connectParticles();
     }
 
-    // Connect nearby particles with lines
-    function connectParticles() {
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          const dx = particlesArray[a].x - particlesArray[b].x;
-          const dy = particlesArray[a].y - particlesArray[b].y;
-          const distance = dx * dx + dy * dy;
-          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
+    let resizeTimer;
     window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      }, 250);
     });
 
     init();
